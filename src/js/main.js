@@ -1,3 +1,7 @@
 import './libs/lib'
 
-$('.active').toggleClass('hello');
+$('button').on('click', function () {
+    $(this).toggleClass('active')
+})
+
+console.log($('button').html('new innerHTML'));

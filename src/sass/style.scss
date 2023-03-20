@@ -1,5 +1,17 @@
 * {
-    margin: 0;
+    font-size: 40px;
+    margin: 20px;
     padding: 0;
     box-sizing: border-box;
+}
+
+button {
+    width: 30%;
+    height: 150px;
+    background-color: aqua;
+}
+
+.active {
+    color: red;
+    font-weight: 900;
 }

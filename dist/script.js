@@ -50,13 +50,86 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_classes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/classes */ "./src/js/libs/modules/classes.js");
 /* harmony import */ var _modules_handlers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/handlers */ "./src/js/libs/modules/handlers.js");
 /* harmony import */ var _modules_attributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/attributes */ "./src/js/libs/modules/attributes.js");
+/* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./src/js/libs/modules/actions.js");
 // Додаємо до основної функціі $, інші методи 
 
 
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_core__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/***/ }),
+
+/***/ "./src/js/libs/modules/actions.js":
+/*!****************************************!*\
+  !*** ./src/js/libs/modules/actions.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/libs/core.js");
+
+
+// змінює структуру Елементу. Також отримує елемент
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.html = function (content) {
+  for (let i = 0; i < this.length; i++) {
+    if (content) {
+      this[i].innerHTML = content;
+    } else {
+      return this[i].innerHTML;
+    }
+  }
+  return this;
+};
+
+//отримуємо елемент за номером
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.eq = function (i) {
+  const swap = this[i];
+  const objLength = Object.keys(this).length;
+  for (let i = 0; i < objLength; i++) {
+    delete this[i];
+  }
+  this[0] = swap;
+  this.length = 1;
+  return this;
+};
+
+//отримуємо номер елементу (число)
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.index = function () {
+  const parent = this[0].parentNode;
+  const childs = [...parent.children];
+  const findMyIndex = item => {
+    return item == this[0];
+  };
+  return childs.findIndex(findMyIndex);
+};
+
+// Шукає усі елементи. формує в масив
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.find = function (selector) {
+  let numberOfItems = 0; //  загальна кількість елементів
+  let conunter = 0; // кількість записаних елементів
+
+  const copyObj = Object.assign({}, this);
+  for (let i = 0; i < copyObj.length; i++) {
+    const arr = copyObj[i].querySelectorAll(selector);
+    if (arr.length == 0) {
+      continue;
+    }
+    for (let j = 0; j < arr.length; j++) {
+      this[conunter] = arr[j];
+      conunter++;
+    }
+    numberOfItems += arr.length;
+  }
+  this.length = numberOfItems;
+  const objLength = Object.keys(this).length;
+  for (; numberOfItems < objLength; numberOfItems++) {
+    delete this[numberOfItems];
+  }
+  return this;
+};
 
 /***/ }),
 
@@ -70,7 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/libs/core.js");
 
 
-// & Установка атрибута
+//  Установка атрибута
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.setAttr = function (name, value) {
   for (let i = 0; i < this.length; i++) {
     if (!name && !value) {
@@ -84,7 +157,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.setAttr = function (name
   return this;
 };
 
-// & Удаление атрибута
+//  Удаление атрибута
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.removeAttr = function (name) {
   for (let i = 0; i < this.length; i++) {
     this[i].removeAttribute(name);
@@ -92,7 +165,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.removeAttr = function (n
   return this;
 };
 
-// & Переключение атрибута
+//  Переключение атрибута
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toggleAttr = function (name, value) {
   for (let i = 0; i < this.length; i++) {
     if (this[i].hasAttribute(name)) {
@@ -106,7 +179,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toggleAttr = function (n
   return this;
 };
 
-// & Значение атрибута
+//  Значение атрибута
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.getAttr = function (name) {
   for (let i = 0; i < this.length; i++) {
     if (!this[i].getAttribute(name)) {
@@ -308,7 +381,10 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _libs_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./libs/lib */ "./src/js/libs/lib.js");
 
-$('.active').toggleClass('hello');
+$('button').on('click', function () {
+  $(this).toggleClass('active');
+});
+console.log($('button').html('new innerHTML'));
 })();
 
 /******/ })()

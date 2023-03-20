@@ -1,6 +1,6 @@
 import $ from "../core";
 
-// & Установка атрибута
+//  Установка атрибута
 $.prototype.setAttr = function (name, value) {
     for (let i = 0; i < this.length; i++) {
         if (!name && !value) {
@@ -14,7 +14,7 @@ $.prototype.setAttr = function (name, value) {
     return this;
 };
 
-// & Удаление атрибута
+//  Удаление атрибута
 $.prototype.removeAttr = function (name) {
     for (let i = 0; i < this.length; i++) {
         this[i].removeAttribute(name);
@@ -22,7 +22,7 @@ $.prototype.removeAttr = function (name) {
     return this;
 };
 
-// & Переключение атрибута
+//  Переключение атрибута
 $.prototype.toggleAttr = function (name, value) {
     for (let i = 0; i < this.length; i++) {
         if (this[i].hasAttribute(name)) {
@@ -36,7 +36,7 @@ $.prototype.toggleAttr = function (name, value) {
     return this;
 };
 
-// & Значение атрибута
+//  Значение атрибута
 $.prototype.getAttr = function (name) {
     for (let i = 0; i < this.length; i++) {
         if (!this[i].getAttribute(name)) {
