@@ -131,6 +131,53 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.find = function (selecto
   return this;
 };
 
+// повертає найбилжчого сусіда 
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.closest = function (selector) {
+  let counter = 0;
+  for (let i = 0; i < this.length; i++) {
+    let length = this.length;
+    if (this[i].closest(selector)) {
+      this[i] = this[i].closest(selector);
+      counter++;
+    } else {
+      console.log(`This parent Class ${selector} is not found for used child Class`);
+      length--;
+    }
+  }
+  this.length = length;
+  const objLength = Object.keys(this).length;
+  for (; counter < objLength; counter++) {
+    delete this[counter];
+  }
+  return this;
+};
+
+// повертає Усіх сосідів, без наявності вказаного елемента.
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.siblings = function () {
+  let numberOfItems = 0; //  загальна кількість елементів
+  let conunter = 0; // кількість записаних елементів
+
+  const copyObj = Object.assign({}, this);
+  for (let i = 0; i < copyObj.length; i++) {
+    const arr = copyObj[i].parentNode.children;
+    for (let j = 0; j < arr.length; j++) {
+      if (copyObj[i] === arr[j]) {
+        continue;
+      }
+      this[conunter] = arr[j];
+      conunter++;
+    }
+    numberOfItems += arr.length - 1;
+  }
+  this.length = numberOfItems;
+  const objLength = Object.keys(this).length;
+  for (; numberOfItems < objLength; numberOfItems++) {
+    delete this[numberOfItems];
+  }
+  return this;
+};
+
 /***/ }),
 
 /***/ "./src/js/libs/modules/attributes.js":
@@ -384,7 +431,9 @@ __webpack_require__.r(__webpack_exports__);
 $('button').on('click', function () {
   $(this).toggleClass('active');
 });
-console.log($('button').html('new innerHTML'));
+console.log($('.some').closest('.active'));
+console.log($('.some').closest('.listItem').addClass('asdaasdasdssd'));
+console.log($('body').siblings());
 })();
 
 /******/ })()

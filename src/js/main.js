@@ -4,4 +4,8 @@ $('button').on('click', function () {
     $(this).toggleClass('active')
 })
 
-console.log($('button').html('new innerHTML'));
+console.log($('.some').closest('.active'));
+console.log($('.some').closest('.listItem').addClass('asdaasdasdssd'));
+console.log($('body').siblings());
+
+
