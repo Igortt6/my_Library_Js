@@ -381,6 +381,16 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (dura
   }
   return this;
 };
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeToggle = function (duration, display, fin) {
+  for (let i = 0; i < this.length; i++) {
+    if (window.getComputedStyle(this[i]).display === 'none') {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).fadeIn(duration, display, fin);
+    } else {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).fadeOut(duration, fin);
+    }
+  }
+  return this;
+};
 
 /***/ }),
 
@@ -490,13 +500,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _libs_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./libs/lib */ "./src/js/libs/lib.js");
 
 (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#first').on('click', () => {
-  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-text="first"]').fadeOut(800);
+  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-text="first"]').fadeToggle(800);
 });
 (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-count="second"]').on('click', () => {
-  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-text="second"]').fadeOut(800);
+  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-text="second"]').fadeToggle(800);
 });
 (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-count="all"]').on('click', () => {
-  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.text').fadeOut(800);
+  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.text').fadeToggle(800);
 });
 })();
 
