@@ -37,7 +37,7 @@ $.prototype.fadeIn = function (duration, display, fin) {
     return this;
 }
 
-$.prototype.fadeOut = async function (duration, fin) {
+$.prototype.fadeOut = function (duration, fin) {
     for (let i = 0; i < this.length; i++) {
         const _fadeOut = (complection) => {
 
@@ -51,5 +51,5 @@ $.prototype.fadeOut = async function (duration, fin) {
         requestAnimationFrame(ani);
     }
 
-    return await this;
+    return this;
 }

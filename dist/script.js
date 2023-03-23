@@ -368,7 +368,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeIn = function (durat
   }
   return this;
 };
-_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = async function (duration, fin) {
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (duration, fin) {
   for (let i = 0; i < this.length; i++) {
     const _fadeOut = complection => {
       this[i].style.opacity = 1 - complection;
@@ -379,7 +379,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = async function
     const ani = this.animateOverTime(duration, _fadeOut, fin);
     requestAnimationFrame(ani);
   }
-  return await this;
+  return this;
 };
 
 /***/ }),
@@ -489,16 +489,14 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _libs_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./libs/lib */ "./src/js/libs/lib.js");
 
-$('.press').on('click', function () {
-  $(this).toggleClass('active');
+(0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#first').on('click', () => {
+  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-text="first"]').fadeOut(800);
 });
-console.log($('.some').closest('.active'));
-console.log($('.some').closest('.listItem').addClass('asdaasdasdssd'));
-$('.fadeOut').on('click', function () {
-  $('.active').fadeOut(1500);
+(0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-count="second"]').on('click', () => {
+  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-text="second"]').fadeOut(800);
 });
-$('.fadeIn').on('click', function () {
-  $('.active').fadeIn(1500);
+(0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-count="all"]').on('click', () => {
+  (0,_libs_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.text').fadeOut(800);
 });
 })();
 

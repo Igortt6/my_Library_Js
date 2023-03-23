@@ -1,16 +1,13 @@
-import './libs/lib'
+import $ from './libs/lib';
 
-$('.press').on('click', function () {
-    $(this).toggleClass('active')
-})
+$('#first').on('click', () => {
+    $('[data-text="first"]').fadeOut(800);
+});
 
-console.log($('.some').closest('.active'));
-console.log($('.some').closest('.listItem').addClass('asdaasdasdssd'));
+$('[data-count="second"]').on('click', () => {
+    $('[data-text="second"]').fadeOut(800);
+});
 
-$('.fadeOut').on('click', function () {
-    $('.active').fadeOut(1500)
-})
-
-$('.fadeIn').on('click', function () {
-    $('.active').fadeIn(1500)
-})
+$('[data-count="all"]').on('click', () => {
+    $('.text').fadeOut(800);
+});
