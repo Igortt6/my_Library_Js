@@ -51,7 +51,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_handlers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/handlers */ "./src/js/libs/modules/handlers.js");
 /* harmony import */ var _modules_attributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/attributes */ "./src/js/libs/modules/attributes.js");
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./src/js/libs/modules/actions.js");
+/* harmony import */ var _modules_effects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/effects */ "./src/js/libs/modules/effects.js");
 // Додаємо до основної функціі $, інші методи 
+
 
 
 
@@ -323,6 +325,65 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.toggle = function () {
 
 /***/ }),
 
+/***/ "./src/js/libs/modules/effects.js":
+/*!****************************************!*\
+  !*** ./src/js/libs/modules/effects.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/libs/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.animateOverTime = function (duration, callBack, fin) {
+  let timeStart;
+  function _animateOverTime(time) {
+    if (!timeStart) {
+      timeStart = time; // Задаємо час початку
+    }
+
+    let timeElapsed = time - timeStart; // Час дії анімації
+    let complection = Math.min(timeElapsed / duration, 1); // від  0 до 1
+
+    callBack(complection);
+    if (timeElapsed < duration) {
+      requestAnimationFrame(_animateOverTime);
+    } else {
+      if (typeof fin === 'function') {
+        fin();
+      }
+    }
+  }
+  return _animateOverTime;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeIn = function (duration, display, fin) {
+  for (let i = 0; i < this.length; i++) {
+    this[i].style.display = display || 'block'; //параметр за умовчанням. Блок якщо не передано дісплей
+
+    const _fadeIn = complection => {
+      this[i].style.opacity = complection; // зінює opacity в залежності від виранованого complection
+    };
+
+    const ani = this.animateOverTime(duration, _fadeIn, fin);
+    requestAnimationFrame(ani);
+  }
+  return this;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = async function (duration, fin) {
+  for (let i = 0; i < this.length; i++) {
+    const _fadeOut = complection => {
+      this[i].style.opacity = 1 - complection;
+      if (complection === 1) {
+        this[i].style.display = 'none';
+      }
+    };
+    const ani = this.animateOverTime(duration, _fadeOut, fin);
+    requestAnimationFrame(ani);
+  }
+  return await this;
+};
+
+/***/ }),
+
 /***/ "./src/js/libs/modules/handlers.js":
 /*!*****************************************!*\
   !*** ./src/js/libs/modules/handlers.js ***!
@@ -428,12 +489,17 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _libs_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./libs/lib */ "./src/js/libs/lib.js");
 
-$('button').on('click', function () {
+$('.press').on('click', function () {
   $(this).toggleClass('active');
 });
 console.log($('.some').closest('.active'));
 console.log($('.some').closest('.listItem').addClass('asdaasdasdssd'));
-console.log($('body').siblings());
+$('.fadeOut').on('click', function () {
+  $('.active').fadeOut(1500);
+});
+$('.fadeIn').on('click', function () {
+  $('.active').fadeIn(1500);
+});
 })();
 
 /******/ })()

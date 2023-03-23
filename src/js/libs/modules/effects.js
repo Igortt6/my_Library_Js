@@ -1,4 +1,3 @@
-import { type } from 'os';
 import $ from '../core';
 $.prototype.animateOverTime = function (duration, callBack, fin) {
     let timeStart;
@@ -38,10 +37,8 @@ $.prototype.fadeIn = function (duration, display, fin) {
     return this;
 }
 
-$.prototype.fadeOut = function (duration, fin) {
+$.prototype.fadeOut = async function (duration, fin) {
     for (let i = 0; i < this.length; i++) {
-        this[i].style.display = display || 'block';
-
         const _fadeOut = (complection) => {
 
             this[i].style.opacity = 1 - complection;
@@ -54,5 +51,5 @@ $.prototype.fadeOut = function (duration, fin) {
         requestAnimationFrame(ani);
     }
 
-    return this;
+    return await this;
 }
