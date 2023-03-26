@@ -2,6 +2,35 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/libs/components/dropdown.js":
+/*!********************************************!*\
+  !*** ./src/js/libs/components/dropdown.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/libs/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dropdown = function () {
+  for (let i = 0; i < this.length; i++) {
+    const id = (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).getAttr('id');
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).click(() => {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(`[data-toggle-id='${id}']`).fadeToggle(300);
+    });
+  }
+};
+(0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.dropdown-toggle').dropdown();
+{/* <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" id="SameSELECTOR"> Dropdown button</button>
+    <div class="dropdown-menu" data-toggle-id="SameSELECTOR">
+        <a href="#" class="dropdown-item">a 1</a>
+        <a href="#" class="dropdown-item">a 2</a>
+        <a href="#" class="dropdown-item">a 3</a>
+    </div>
+ </div> */}
+
+/***/ }),
+
 /***/ "./src/js/libs/core.js":
 /*!*****************************!*\
   !*** ./src/js/libs/core.js ***!
@@ -52,7 +81,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_attributes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/attributes */ "./src/js/libs/modules/attributes.js");
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./src/js/libs/modules/actions.js");
 /* harmony import */ var _modules_effects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/effects */ "./src/js/libs/modules/effects.js");
+/* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/dropdown */ "./src/js/libs/components/dropdown.js");
 // Додаємо до основної функціі $, інші методи 
+
 
 
 
@@ -341,7 +372,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.animateOverTime = functi
       timeStart = time; // Задаємо час початку
     }
 
-    let timeElapsed = time - timeStart; // Час дії анімації
+    let timeElapsed = time - timeStart; // Час дії анімації ( )
     let complection = Math.min(timeElapsed / duration, 1); // від  0 до 1
 
     callBack(complection);

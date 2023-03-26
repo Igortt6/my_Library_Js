@@ -7,7 +7,7 @@ $.prototype.animateOverTime = function (duration, callBack, fin) {
             timeStart = time;                                   // Задаємо час початку
         }
 
-        let timeElapsed = time - timeStart;                     // Час дії анімації
+        let timeElapsed = time - timeStart;                     // Час дії анімації ( )
         let complection = Math.min(timeElapsed / duration, 1);  // від  0 до 1
 
         callBack(complection)
@@ -40,7 +40,6 @@ $.prototype.fadeIn = function (duration, display, fin) {
 $.prototype.fadeOut = function (duration, fin) {
     for (let i = 0; i < this.length; i++) {
         const _fadeOut = (complection) => {
-
             this[i].style.opacity = 1 - complection;
             if (complection === 1) {
                 this[i].style.display = 'none'
