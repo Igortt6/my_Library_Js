@@ -7,6 +7,7 @@ import './modules/attributes';
 import './modules/actions';
 import './modules/effects';
 import './components/dropdown'
+import './components/modal'
 
 
 export default $;

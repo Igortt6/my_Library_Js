@@ -31,6 +31,72 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.dropdown = function () {
 
 /***/ }),
 
+/***/ "./src/js/libs/components/modal.js":
+/*!*****************************************!*\
+  !*** ./src/js/libs/components/modal.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/libs/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.modal = function () {
+  for (let i = 0; i < this.length; i++) {
+    const target = (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).getAttr('data-target');
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).click(e => {
+      console.log(this.calcScroll());
+      e.preventDefault();
+      if (document.body.offsetHeight > document.documentElement.clientHeight) {
+        document.body.style.marginRight = `${this.calcScroll()}px`;
+        (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').moveX(-(this.calcScroll() / 2));
+      }
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(target).fadeIn(500);
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-close]').click(() => {
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').fadeOut(300);
+    document.body.style.overflow = '';
+    document.body.style.marginRight = '0';
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').moveX();
+  });
+  (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').click(e => {
+    if (e.target.classList.contains('modal')) {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').fadeOut(300);
+      document.body.style.overflow = '';
+      document.body.style.marginRight = '0';
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('.modal').moveX();
+    }
+  });
+};
+
+// Якщо є зміщення в сторону, міщюємо.
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.moveX = function (move) {
+  for (let i = 0; i < this.length; i++) {
+    if (!move) {
+      this[i].style.transform = '';
+    } else {
+      this[i].style.transform = `TranslateX(${move}px)`;
+    }
+  }
+};
+
+// Вираховуємо скільки пікселів займає скрол
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.calcScroll = function () {
+  let div = document.createElement('div');
+  div.style.width = '50px';
+  div.style.height = '50px';
+  div.style.overflowY = 'scroll';
+  div.style.visibility = 'hidden';
+  document.body.appendChild(div);
+  let scrollWidth = div.offsetWidth - div.clientWidth;
+  div.remove();
+  return scrollWidth;
+};
+(0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-toggle="modal"]').modal();
+
+/***/ }),
+
 /***/ "./src/js/libs/core.js":
 /*!*****************************!*\
   !*** ./src/js/libs/core.js ***!
@@ -82,7 +148,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/actions */ "./src/js/libs/modules/actions.js");
 /* harmony import */ var _modules_effects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/effects */ "./src/js/libs/modules/effects.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/dropdown */ "./src/js/libs/components/dropdown.js");
+/* harmony import */ var _components_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/modal */ "./src/js/libs/components/modal.js");
 // Додаємо до основної функціі $, інші методи 
+
 
 
 
