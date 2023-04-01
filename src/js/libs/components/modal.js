@@ -1,38 +1,35 @@
 import $ from '../core';
 
-$.prototype.modal = function () {
+$.prototype.modal = function (created) {
     for (let i = 0; i < this.length; i++) {
-        const target = $(this[i]).getAttr('data-target');
-
+        const target = this[i].getAttribute('data-target');
         $(this[i]).click((e) => {
-            console.log(this.calcScroll())
             e.preventDefault();
-            if (document.body.offsetHeight > document.documentElement.clientHeight) {
-                document.body.style.marginRight = `${this.calcScroll()}px`;
-                $('.modal').moveX(-(this.calcScroll() / 2))
-            }
-
             $(target).fadeIn(500);
             document.body.style.overflow = 'hidden';
         });
+
+        const closeElements = document.querySelectorAll(`${target} [data-close]`);
+        closeElements.forEach(elem => {
+            $(elem).click(() => {
+                $(target).fadeOut(500);
+                document.body.style.overflow = '';
+                if (created) {
+                    document.querySelector(target).remove();
+                }
+            });
+        });
+
+        $(target).click(e => {
+            if (e.target.classList.contains('modal')) {
+                $(target).fadeOut(500);
+                document.body.style.overflow = '';
+                if (created) {
+                    document.querySelector(target).remove();
+                }
+            }
+        });
     }
-
-    $('[data-close]').click(() => {
-        $('.modal').fadeOut(300);
-        document.body.style.overflow = '';
-        document.body.style.marginRight = '0';
-        $('.modal').moveX();
-    });
-
-
-    $('.modal').click(e => {
-        if (e.target.classList.contains('modal')) {
-            $('.modal').fadeOut(300);
-            document.body.style.overflow = '';
-            document.body.style.marginRight = '0';
-            $('.modal').moveX();
-        }
-    });
 };
 
 // Якщо є зміщення в сторону, міщюємо.
@@ -66,3 +63,60 @@ $.prototype.calcScroll = function () {
 
 $('[data-toggle="modal"]').modal();
 
+
+// Альтернатива ховання скрола
+// При помощи calc(100vw - 100%) можно вычислить ширину скроллбара (а если он не отображается, то будет 0). Идея: при помощи отрицательного margin-right увеличить ширину <html> на эту ширину. При этом появляется горизонтальная полоса прокрутки — ее скрываем.
+// html {   overflow-x: hidden; 
+//             margin-right: calc(-1 * (100vw - 100%));
+//             }
+
+// Динамічне формування модального вікна 
+$.prototype.createModal = function ({ text, btns } = {}) {
+    for (let i = 0; i < this.length; i++) {
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
+        modal.setAttribute('id', this[i].getAttribute('data-target').slice(1));
+
+        // btns = {count: num, settings: [[text, classNames=[], close, cb]]}
+        const buttons = [];
+        for (let j = 0; j < btns.count; j++) {
+            let btn = document.createElement('button');
+            btn.classList.add('btn', ...btns.settings[j][1]);
+            btn.textContent = btns.settings[j][0];
+            if (btns.settings[j][2]) {
+                btn.setAttribute('data-close', 'true');
+            }
+            if (btns.settings[j][3] && typeof (btns.settings[j][3]) === 'function') {
+                btn.addEventListener('click', btns.settings[j][3]);
+            }
+
+            buttons.push(btn);
+        }
+
+        modal.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button class="close" data-close>
+                    <span>&times;</span>
+                </button>
+                <div class="modal-header">
+                    <div class="modal-title">
+                        ${text.title}
+                    </div>
+                </div>
+                <div class="modal-body">
+                    ${text.body}
+                </div>
+                <div class="modal-footer">
+                    
+                </div>
+            </div>
+        </div>
+        `;
+
+        modal.querySelector(".modal-footer").append(...buttons);
+        document.body.appendChild(modal);
+        $(this[i]).modal(true);
+        $(this[i].getAttribute('data-target')).fadeIn(500);
+    }
+};
