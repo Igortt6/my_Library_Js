@@ -84,8 +84,9 @@ $.prototype.closest = function (selector) {
             console.log(`This parent Class ${selector} is not found for used child Class`);
             length--;
         }
+        this.length = length;
     }
-    this.length = length;
+
 
     const objLength = Object.keys(this).length;
     for (; counter < objLength; counter++) {

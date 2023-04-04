@@ -155,6 +155,50 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.createModal = function (
 
 /***/ }),
 
+/***/ "./src/js/libs/components/tab.js":
+/*!***************************************!*\
+  !*** ./src/js/libs/components/tab.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/libs/core.js");
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.tab = function () {
+  for (let i = 0; i < this.length; i++) {
+    (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).on('click', () => {
+      (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).addClass('tab-item--active').siblings().removeClass('tab-item--active').closest('.tab').find('.tab-content').removeClass('tab-content--active').eq((0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).index()).addClass('tab-content--active');
+    });
+  }
+};
+
+// відстежуємо клік по понелі з табами. 
+(0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-tabpanel] .tab-item').tab();
+{/* <div class="tab">
+ <div class="tab-panel" data-tabpanel>
+    <div class="tab-item tab-item--active">Content 1</div>
+    <div class="tab-item">Content 2</div>
+    <div class="tab-item">Content 3</div>
+ </div>
+ <div class="tab-content tab-content--active">
+    Text 1
+    <br> <br>
+    Text 1
+ </div>
+ <div class="tab-content">
+    Text 2
+    <br> <br>
+    Text 2
+    <br> <br>
+    Text 2
+ </div>
+ <div class="tab-content">
+    Text 3
+ </div>
+ </div> */}
+
+/***/ }),
+
 /***/ "./src/js/libs/core.js":
 /*!*****************************!*\
   !*** ./src/js/libs/core.js ***!
@@ -207,7 +251,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_effects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/effects */ "./src/js/libs/modules/effects.js");
 /* harmony import */ var _components_dropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/dropdown */ "./src/js/libs/components/dropdown.js");
 /* harmony import */ var _components_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/modal */ "./src/js/libs/components/modal.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/tab */ "./src/js/libs/components/tab.js");
 // Додаємо до основної функціі $, інші методи 
+
 
 
 
@@ -302,8 +348,8 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.closest = function (sele
       console.log(`This parent Class ${selector} is not found for used child Class`);
       length--;
     }
+    this.length = length;
   }
-  this.length = length;
   const objLength = Object.keys(this).length;
   for (; counter < objLength; counter++) {
     delete this[counter];
