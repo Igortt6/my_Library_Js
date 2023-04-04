@@ -1,0 +1,55 @@
+.accordion {
+    max-width: 700px;
+
+    &-head {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: 50px;
+        padding: 0 20px;
+        border: 1px solid rgba(0, 0, 0, .2);
+        font-size: 18px;
+        color: $dark;
+        cursor: pointer;
+
+        &--active {
+            color: $primary;
+            background-color: rgb(0, 0, 255, .2);
+        }
+
+        &::after {
+
+            content: '';
+            display: inline-block;
+            margin-left: 5px;
+            vertical-align: 3px;
+            border-top: 7px solid;
+            border-right: 7px solid transparent;
+            border-bottom: 0;
+            border-left: 7px solid transparent;
+        }
+    }
+
+    &-content {
+        max-height: 0px;
+        opacity: 0;
+        overflow: hidden;
+        transition: opacity 0.5s, max-height 0.6s, padding 0.1s;
+        background-color: #fff;
+        border: 1px solid rgba(224, 211, 211, 1);
+        border-top: none;
+        border-radius: 0 0 4px 4px;
+
+        &--active {
+            overflow: visible;
+            opacity: 1;
+        }
+    }
+
+    &-inner {
+        display: block;
+        padding: 20px;
+    }
+}
