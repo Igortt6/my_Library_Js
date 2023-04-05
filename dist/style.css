@@ -612,3 +612,9 @@
 .h-500 {
   height: 500px;
 }
+
+h2 {
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+}

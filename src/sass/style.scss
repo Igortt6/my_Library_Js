@@ -3,3 +3,9 @@
 @import './general/typography.scss';
 @import './components/ui.scss';
 @import './helpers/classes.scss';
+
+h2 {
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+}
